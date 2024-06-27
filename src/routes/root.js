@@ -15,7 +15,6 @@ function Root() {
   useEffect(() => {
     getMovies();
   }, []);
-  console.log(movies);
 
   return (
     <div>
@@ -25,7 +24,7 @@ function Root() {
       ) : (
         <div>
           {movies.map((movie) => (
-            <MovieList movie={movie} />
+            <MovieList key={movie.id} movie={movie} />
           ))}
         </div>
       )}

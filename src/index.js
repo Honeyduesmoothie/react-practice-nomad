@@ -7,13 +7,14 @@ import Details from "./routes/movies";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: `${process.env.PUBLIC_URL}/`,
     element: <Root />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/movies/:id",
+    path: `${process.env.PUBLIC_URL}/movies/:id`,
     element: <Details />,
+    errorElement: <ErrorPage />,
   },
 ]);
 

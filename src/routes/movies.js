@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import MovieDetail from "../components/MovieDetail";
 function Details() {
+  const [loading, setLoading] = useState(true);
   const [detail, setDetail] = useState("");
   const { id } = useParams();
   async function getMovieDetail() {
@@ -10,23 +12,17 @@ function Details() {
     const json = await response.json();
     console.log(json);
     setDetail(json.data.movie);
+    setLoading(false);
   }
   useEffect(() => {
     getMovieDetail();
   }, []);
   return (
     <div>
-      <h1>{detail.title}</h1>
-      <img src={detail.medium_cover_image} alt={detail.title} />
-      <p>{detail.description_full}</p>
-      <ul>
-        {detail.genres.map((genre) => (
-          <li>{genre}</li>
-        ))}
-      </ul>
-      <p>{detail.year}</p>
-      <p>{detail.rating}</p>
-      <p>{detail.runtime} minutes</p>
+      {loading ? "" : <MovieDetail detail={detail} />}
+      <Link to={`${process.env.PUBLIC_URL}/`}>
+        <span>Return to Home</span>
+      </Link>
     </div>
   );
 }
